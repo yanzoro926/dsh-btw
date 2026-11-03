@@ -4,6 +4,12 @@
 
 适合这些场景：主会话里有个名词没看懂、想确认某段输出的含义、想在不打断主任务的情况下先问一句。
 
+## 界面
+
+![btw 旁问弹窗：空状态，顶部是上下文范围、模型与「送入主会话」](https://raw.githubusercontent.com/yanzoro926/dsh-btw/main/assets/screenshot-1.png)
+
+![btw 旁问弹窗：引用选中文本后回答，底部是提问框与隐私提示](https://raw.githubusercontent.com/yanzoro926/dsh-btw/main/assets/screenshot-2.png)
+
 ## 功能
 
 - **一次性旁问**：输入框右侧的 `btw` 按钮，或输入 `/btw` 命令，打开一个独立浮窗提问；回答流式显示，支持 Markdown。
