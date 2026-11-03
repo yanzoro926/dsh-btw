@@ -1,6 +1,6 @@
 {
   "name": "dsh-btw",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "private": false,
   "description": "btw - one-off context side questions for a DSH session: a temporary dialog that inherits the current session context; answers stay in the dialog unless the user reviews a compressed summary and sends it into the session.",
   "repository": {

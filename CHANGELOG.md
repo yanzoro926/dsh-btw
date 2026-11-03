@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.3 — 2026-11-03（README 面向使用者重写）
+
+- README 改为以功能和用法为主：功能、安装、使用、送入主会话、隐私边界、配置、已知限制，移除逐版本的开发过程、内部路由与 E2E 清单。
+- 功能与 0.5.2 相同；版本仅用于更新 npm 上的 README。
+
 ## 0.5.2 — 2026-11-03（仓库元数据）
 
 - `package.json` 增加 `repository` / `homepage` / `bugs`，指向 https://github.com/yanzoro926/dsh-btw；用于 npm 包与源码仓库互链（awesome-dsh-plugin 收录要求）。

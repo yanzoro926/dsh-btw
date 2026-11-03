@@ -21,7 +21,7 @@ import path from 'node:path'
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const stage = path.join(root, '.publish')
 
-const FILES = ['lib', 'cordis.patch.yml', 'README.md', 'CHANGELOG.md', 'package.json']
+const FILES = ['lib', 'cordis.patch.yml', 'README.md', 'CHANGELOG.md', 'LICENSE', 'package.json']
 
 await rm(stage, { recursive: true, force: true })
 await mkdir(stage, { recursive: true })
