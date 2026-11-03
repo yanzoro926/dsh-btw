@@ -1,0 +1,14 @@
+# dsh-btw bundle patch
+#
+# Install:
+#   dsh plugin --profile desktop add file:D:/DSH-workspace/dsh-btw
+# The CLI reconciles `dsh.profile.bundles` against installed packages and,
+# seeing this declaration, appends "dsh-btw" to the bundle stack. Manual
+# fallback: add "dsh-btw" to `dsh.profile.bundles` in the profile package.json,
+# then restart DSH (client bundles are hashed into the boot graph at host start).
+#
+# Host half: lib/index.js registers /btw/health and /btw/ask (SSE).
+# Client half: lib/client.js is discovered through dsh.client.platform = "web".
+- insert:
+    - id: btw
+      name: dsh-btw

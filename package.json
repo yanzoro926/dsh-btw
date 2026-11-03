@@ -1,0 +1,51 @@
+{
+  "name": "dsh-btw",
+  "version": "0.5.2",
+  "private": false,
+  "description": "btw - one-off context side questions for a DSH session: a temporary dialog that inherits the current session context; answers stay in the dialog unless the user reviews a compressed summary and sends it into the session.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yanzoro926/dsh-btw.git"
+  },
+  "homepage": "https://github.com/yanzoro926/dsh-btw#readme",
+  "bugs": {
+    "url": "https://github.com/yanzoro926/dsh-btw/issues"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "check": "node --check lib/index.js && node --check lib/client.js && node --check lib/logic.js",
+    "test": "node --test test/",
+    "test:direct": "node test/logic.test.mjs && node test/host-smoke.test.mjs && node test/client-smoke.test.mjs"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "plugin",
+    "btw",
+    "side-question"
+  ],
+  "engines": {
+    "node": ">=22.5"
+  },
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
+    }
+  }
+}
