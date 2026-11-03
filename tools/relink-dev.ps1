@@ -15,7 +15,7 @@
 $ErrorActionPreference = 'Stop'
 
 $repo = Split-Path -Parent $PSScriptRoot
-$installed = Join-Path $env:USERPROFILE '.dsh\profiles\desktop\node_modules\dsh-btw'
+$installed = Join-Path $env:USERPROFILE '.dsh\profiles\desktop\node_modules\dsh-btw-plugin'
 
 if (-not (Test-Path -LiteralPath $repo)) { throw "repository not found: $repo" }
 if (-not (Test-Path -LiteralPath $installed)) { throw "plugin is not installed in the desktop profile: $installed" }
@@ -28,7 +28,7 @@ if ($item.Attributes -band [IO.FileAttributes]::ReparsePoint) {
 }
 
 $pkg = Get-Content (Join-Path $installed 'package.json') -Raw | ConvertFrom-Json
-if ($pkg.name -ne 'dsh-btw') { throw "target is not the dsh-btw package: $($pkg.name)" }
+if ($pkg.name -ne 'dsh-btw-plugin') { throw "target is not the dsh-btw-plugin package: $($pkg.name)" }
 
 Remove-Item -LiteralPath $installed -Recurse -Force
 cmd /c mklink /J "$installed" "$repo" | Out-Null

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.5 — 2026-11-03（统一包名为 dsh-btw-plugin）
+
+- 源码包名、Cordis 插件名与 bundle patch 的 insert name 统一为 `dsh-btw-plugin`，与 npm 包名一致，避免本地安装与 npm 包同名冲突。
+- 本地 desktop profile 的依赖与 bundles 改为 `dsh-btw-plugin`，并重新建立指向仓库的 junction。
+- 功能不变；测试 63 个全绿。
+
 ## 0.5.4 — 2026-11-03（README 截图）
 
 - README 增加「界面」一节，放两张实际截图（空状态、引用选中文本后回答）；仓库根新增 `screenshots.json`，供 dsh-market 等商店读取。

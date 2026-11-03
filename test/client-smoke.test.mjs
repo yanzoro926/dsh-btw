@@ -37,7 +37,7 @@ const fakeReact = {
 await import(new URL('../lib/client.js', import.meta.url).href)
 
 function loadClientModule() {
-  assert.equal(loaded.entry.id, 'dsh-btw')
+  assert.equal(loaded.entry.id, 'dsh-btw-plugin')
   assert.equal(typeof loaded.entry.factory, 'function')
   return loaded.entry.factory((name) => {
     if (name === 'react') return fakeReact

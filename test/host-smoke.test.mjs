@@ -162,8 +162,8 @@ function sseEvents(text) {
 test('apply registers all routes and exports the expected metadata', () => {
   const { routes } = start()
   assert.deepEqual([...routes.keys()].sort(), ['/btw/ask', '/btw/commit', '/btw/context', '/btw/health', '/btw/models', '/btw/summarize'])
-  assert.equal(plugin.name, 'dsh-btw')
-  assert.equal(plugin.VERSION, '0.5.4')
+  assert.equal(plugin.name, 'dsh-btw-plugin')
+  assert.equal(plugin.VERSION, '0.5.5')
   assert.deepEqual(plugin.inject, ['webServer', 'llm', 'sessions', 'connection'])
 })
 
@@ -175,8 +175,8 @@ test('GET /btw/health reports config after the admission fence', async () => {
   assert.equal(response.status, 200)
   const body = JSON.parse(response.text)
   assert.equal(body.ok, true)
-  assert.equal(body.plugin, 'dsh-btw')
-  assert.equal(body.version, '0.5.4')
+  assert.equal(body.plugin, 'dsh-btw-plugin')
+  assert.equal(body.version, '0.5.5')
   assert.equal(body.coldRead, 'none')
   assert.deepEqual(body.defaultRoute, { provider: 'opencode-go', model: 'deepseek-v4.1-flash' })
   assert.equal(body.config.toolParity, false)
