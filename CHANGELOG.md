@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.6 — 2026-11-04（修复 Markdown 渲染）
+
+- 修复回答区退回纯文本的问题：`MarkdownText` 是 `React.memo` 包装的组件（typeof 为 object），此前只接受 function，导致标题、表格、代码块全部按原文显示。改为按存在性判断后，表格/标题/列表等 Markdown 正常渲染。
+- 无界面与接口变更；版本 0.5.6，测试 63 个全绿。
+
 ## 0.5.5 — 2026-11-03（统一包名为 dsh-btw-plugin）
 
 - 源码包名、Cordis 插件名与 bundle patch 的 insert name 统一为 `dsh-btw-plugin`，与 npm 包名一致，避免本地安装与 npm 包同名冲突。

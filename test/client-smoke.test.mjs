@@ -144,5 +144,10 @@ test('apply() registers slots and the /btw action (no global shortcut)', () => {
   assert.ok(source.includes('summarizeTransfer'))
   assert.ok(source.includes('commitTransfer'))
 
+  // MarkdownText is a React.memo component (typeof object), not a plain
+  // function: accepting only functions silently degraded every answer to text.
+  assert.ok(source.includes('markdown.MarkdownText ? markdown.MarkdownText : null'))
+  assert.ok(!source.includes("typeof markdown.MarkdownText === 'function'"))
+
   assert.equal(state.disposed, 0) // disposers are returned to Cordis, not called eagerly
 })
