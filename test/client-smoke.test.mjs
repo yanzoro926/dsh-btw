@@ -126,6 +126,8 @@ test('apply() registers slots and the /btw action (no global shortcut)', () => {
   assert.ok(css.includes('.btw-focus-clear'))
   assert.ok(css.includes('.btw-transfer-btn'))
   assert.ok(css.includes('.btw-transfer-panel'))
+  assert.ok(css.includes('.btw-mini'))
+  assert.ok(css.includes('.btw-mini-dot'))
   assert.ok(!css.includes('.btw-away'))
   assert.ok(!css.includes('.btw-msg-action'))
 
@@ -143,6 +145,10 @@ test('apply() registers slots and the /btw action (no global shortcut)', () => {
   assert.ok(!source.includes('copyText'))
   assert.ok(source.includes('summarizeTransfer'))
   assert.ok(source.includes('commitTransfer'))
+  // Minimize: a pill keeps the conversation alive; restoring does not reload.
+  assert.ok(source.includes('btw-mini'))
+  assert.ok(source.includes('toggleMinimize'))
+  assert.ok(source.includes("if (current.minimized)"), 'dialog should render the pill when minimized')
 
   // MarkdownText is a React.memo component (typeof object), not a plain
   // function: accepting only functions silently degraded every answer to text.
