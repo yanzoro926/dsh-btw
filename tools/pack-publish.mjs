@@ -1,11 +1,7 @@
 // Build the npm release copy of this plugin.
 //
-// The repository package is named `dsh-btw` for the local dev install
-// (the desktop profile pins it with a file: dependency and a Junction).
-// That name is already taken on npm by an unrelated project, so the
-// published package is `dsh-btw-plugin`. The only differences are the
-// package name and the bundle patch's insert name; everything else is
-// copied verbatim from the repository.
+// The repository and the published package are both `dsh-btw-plugin`; the
+// only difference is that the bundle patch's insert name is normalized.
 //
 // Usage:
 //   node tools/pack-publish.mjs          # stage the renamed copy in .publish
