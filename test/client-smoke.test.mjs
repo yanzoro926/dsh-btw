@@ -150,10 +150,66 @@ test('apply() registers slots and the /btw action (no global shortcut)', () => {
   assert.ok(source.includes('toggleMinimize'))
   assert.ok(source.includes("if (current.minimized)"), 'dialog should render the pill when minimized')
 
-  // MarkdownText is a React.memo component (typeof object), not a plain
-  // function: accepting only functions silently degraded every answer to text.
-  assert.ok(source.includes('markdown.MarkdownText ? markdown.MarkdownText : null'))
-  assert.ok(!source.includes("typeof markdown.MarkdownText === 'function'"))
+  // Markdown is rendered by the plugin itself: no Harness Client package means
+  // a DSH release cannot silently degrade answers to plain text.
+  assert.ok(!source.includes('dsh-client-ui-primitives'))
+  assert.ok(source.includes('function renderMarkdown'))
+  assert.ok(source.includes("h('table'"))
+  assert.ok(source.includes("h('thead'"))
+  assert.ok(source.includes('btw-table-wrap'))
 
   assert.equal(state.disposed, 0) // disposers are returned to Cordis, not called eagerly
+})
+
+test('built-in Markdown renderer handles headings, tables, lists and code', () => {
+  const module = loadClientModule()
+  const nodes = module.__renderMarkdown([
+    '# 标题',
+    '',
+    '| 名称 | 数量 |',
+    '| :--- | ---: |',
+    '| 甲 | 1 |',
+    '| 乙 | 2 |',
+    '',
+    '```js',
+    'const x = 1',
+    '```',
+    '',
+    '- one',
+    '- two',
+    '',
+    '普通 **粗体** 和 `code`。',
+  ].join('\n'))
+
+  const types = []
+  const walk = (node) => {
+    if (Array.isArray(node)) return node.forEach(walk)
+    if (!node || typeof node !== 'object' || node.type !== 'element') return
+    types.push(node.args[0])
+    node.args.slice(2).forEach(walk)
+  }
+  walk(nodes)
+  assert.ok(types.includes('h1'))
+  assert.ok(types.includes('table'))
+  assert.ok(types.includes('thead') && types.includes('tbody'))
+  assert.ok(types.includes('th') && types.includes('td'))
+  assert.ok(types.includes('pre'))
+  assert.ok(types.includes('ul'))
+  assert.ok(types.includes('strong') && types.includes('code'))
+
+  const table = (function find(list) {
+    for (const node of list) {
+      if (Array.isArray(node)) { const found = find(node); if (found) return found; continue }
+      if (!node || node.type !== 'element') continue
+      if (node.args[0] === 'table') return node
+      const found = find(node.args.slice(2))
+      if (found) return found
+    }
+    return null
+  })(nodes)
+  assert.ok(table, 'a table element should be produced')
+  const headRow = table.args[2].args[2]
+  const cells = headRow.args[2]
+  assert.equal(cells.length, 2)
+  assert.deepEqual(cells[1].args[1].style, { textAlign: 'right' })
 })
